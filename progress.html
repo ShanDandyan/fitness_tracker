@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Progress | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Fitness Tracker</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="progress.html">Progress</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Your Fitness Progress</h1>
+  <p>Track your progress and set new goals!</p>
+</header>
+
+<section>
+  <h2>Workout History</h2>
+  <table id="progress-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Type</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Workout data will go here -->
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Your Goal</h2>
+  <p>Track your progress towards your fitness goals and set new ones to stay motivated.</p>
+  <input type="text" placeholder="Set your goal" id="goal-input" />
+  <button onclick="saveGoal()">Save Goal</button>
+  <p id="goal-display"></p>
+</section>
+
+<footer>
+  <p>© 2025 Fitness Tracker | Built by You</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("active");
+  }
+
+  // Save goal to localStorage
+  function saveGoal() {
+    const goal = document.getElementById('goal-input').value;
+    localStorage.setItem('fitness-goal', goal);
+    document.getElementById('goal-display').innerText = `Your Goal: ${goal}`;
+  }
+
+  // Load goal from localStorage
+  window.onload = function() {
+    const savedGoal = localStorage.getItem('fitness-goal');
+    if (savedGoal) {
+      document.getElementById('goal-display').innerText = `Your Goal: ${savedGoal}`;
+    }
+
+    loadWorkoutHistory();  // Load workout history when page loads
+  }
+
+  // Load workout history from localStorage
+  function loadWorkoutHistory() {
+    const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+    const tableBody = document.getElementById('progress-table').getElementsByTagName('tbody')[0];
+
+    tableBody.innerHTML = '';
+
+    workouts.forEach(workout => {
+      const row = tableBody.insertRow();
+      row.innerHTML = `
+        <td>${workout.date}</td>
+        <td>${workout.duration} minutes</td>
+        <td>${workout.type}</td>
+        <td>${workout.notes}</td>
+      `;
+    });
+  }
+</script>
+
+</body>
+</html>

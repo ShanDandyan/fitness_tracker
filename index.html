@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Home | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body onload="loadProfile()">
+
+  <nav class="navbar">
+    <div class="logo">Fitness Tracker</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="workout.html">Workout</a></li>
+      <li><a href="ai-plan.html">AI Plan</a></li>
+      <li><a href="meditation.html">Meditation</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="trainer.html">Trainer</a></li>
+      <li><a href="sleep.html">Sleep</a></li>
+      <li><a href="hydration.html">Hydration</a></li>
+      <li><a href="progress.html">Progress</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Elevate Your Fitness Journey</h1>
+    <p>AI‑Driven Personalization for Optimal Health</p>
+  </header>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-box">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="4" required></textarea>
+      <button onclick="alert('Message sent!')">Send Message</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Fitness Tracker | Built by You</p>
+  </footer>
+  
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("nav-links");
+      nav.classList.toggle("active");
+    }
+    function loadProfile() {
+      
+    }
+  </script>
+
+</body>
+</html>

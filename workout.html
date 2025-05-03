@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workout Log | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f1a20;
+      color: #fff;
+      margin: 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      background-color: #111;
+      padding: 10px 20px;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+    }
+    .menu-btn {
+      font-size: 1.5em;
+      cursor: pointer;
+      display: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links li a:hover {
+      color: #f0b86b;
+    }
+    header {
+      background: linear-gradient(to right, #1d2b64, #f8cdda);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+      font-family: 'Playfair Display', serif;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .workout-log {
+      background-color: #1e2c38;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: auto;
+    }
+    form label {
+      display: block;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #555;
+      background-color: #222;
+      color: #fff;
+      font-size: 1em;
+    }
+    input[type="date"], input[type="number"], select {
+      font-size: 1.1em;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      background-color: #f0b86b;
+      color: black;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e0a455;
+    }
+    #history-table {
+      margin-top: 40px;
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    #history-table th, #history-table td {
+      padding: 12px;
+      border: 1px solid #555;
+    }
+    #history-table th {
+      background-color: #333;
+    }
+    #history-table td {
+      background-color: #222;
+    }
+    footer {
+      background-color: #0c0c0c;
+      padding: 15px;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Fitness Tracker</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="workout.html">Workout</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Log Your Workout</h1>
+  <p>Track your progress and stay on top of your fitness goals</p>
+</header>
+
+<section class="workout-log">
+  <h2>Log Your Workout</h2>
+  <form id="workout-form">
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+    
+    <label for="duration">Duration (minutes):</label>
+    <input type="number" id="duration" required min="1">
+    
+    <label for="type">Workout Type:</label>
+    <select id="type" required>
+      <option value="Cardio">Cardio</option>
+      <option value="Strength">Strength</option>
+      <option value="Flexibility">Flexibility</option>
+    </select>
+    
+    <label for="notes">Notes:</label>
+    <textarea id="notes" rows="4" placeholder="Add any notes here..."></textarea>
+    
+    <button type="submit">Save Workout</button>
+  </form>
+</section>
+
+<section id="workout-history">
+  <h2>Previous Workouts</h2>
+  <table id="history-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Type</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Workout data will go here -->
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p>© 2025 Fitness Tracker | Built by us</p>
+</footer>
+
+<script>
+  // Toggle menu for mobile view
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("active");
+  }
+
+  // Save workout data in localStorage
+  document.getElementById('workout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const date = document.getElementById('date').value;
+    const duration = document.getElementById('duration').value;
+    const type = document.getElementById('type').value;
+    const notes = document.getElementById('notes').value;
+
+    const workout = { date, duration, type, notes };
+    
+    // Get existing workouts from localStorage
+    let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+    workouts.push(workout);
+    
+    // Save updated workouts back to localStorage
+    localStorage.setItem('workouts', JSON.stringify(workouts));
+    
+    // Reset form
+    document.getElementById('workout-form').reset();
+
+    // Update the workout history display
+    loadWorkoutHistory();
+  });
+
+  // Load workout history from localStorage
+  function loadWorkoutHistory() {
+    const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+    const tableBody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+
+    tableBody.innerHTML = '';
+
+    workouts.forEach(workout => {
+      const row = tableBody.insertRow();
+      row.innerHTML = `
+        <td>${workout.date}</td>
+        <td>${workout.duration} minutes</td>
+        <td>${workout.type}</td>
+        <td>${workout.notes}</td>
+      `;
+    });
+  }
+
+  // Load workout history when the page loads
+  window.onload = loadWorkoutHistory;
+</script>
+
+</body>
+</html>

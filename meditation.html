@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meditation Timer | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f1a20;
+      color: white;
+      margin: 0;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(to right, #1d976c, #93f9b9);
+      padding: 50px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .meditation-section {
+      margin-top: 50px;
+    }
+
+    .timer {
+      font-size: 4em;
+      margin-bottom: 30px;
+    }
+
+    select, button {
+      padding: 10px 15px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #f0b86b;
+      color: black;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e0a455;
+    }
+
+    footer {
+      background-color: #0c0c0c;
+      padding: 15px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Fitness Tracker</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="meditation.html">Meditation</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Meditation Timer</h1>
+  <p>Relax your mind, one breath at a time</p>
+</header>
+
+<section class="meditation-section">
+  <div>
+    <label for="duration">Select Duration:</label>
+    <select id="duration">
+      <option value="1">1 Minute</option>
+      <option value="3">3 Minutes</option>
+      <option value="5">5 Minutes</option>
+      <option value="10">10 Minutes</option>
+    </select>
+  </div>
+
+  <div class="timer" id="timer-display">00:00</div>
+
+  <div>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Fitness Tracker | Built by You</p>
+</footer>
+
+<script>
+  let timer;
+  let totalTime = 0;
+  let currentTime = 0;
+  let isPaused = false;
+
+  function startTimer() {
+    const minutes = parseInt(document.getElementById('duration').value);
+    totalTime = minutes * 60;
+    currentTime = totalTime;
+
+    if (timer) clearInterval(timer);
+    isPaused = false;
+
+    timer = setInterval(() => {
+      if (!isPaused) {
+        if (currentTime > 0) {
+          currentTime--;
+          displayTime(currentTime);
+        } else {
+          clearInterval(timer);
+          alert("Meditation complete!");
+        }
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    isPaused = !isPaused;
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    currentTime = 0;
+    displayTime(currentTime);
+  }
+
+  function displayTime(seconds) {
+    const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const sec = String(seconds % 60).padStart(2, '0');
+    document.getElementById('timer-display').textContent = `${min}:${sec}`;
+  }
+
+  // Mobile nav toggle
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

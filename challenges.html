@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Challenges Tracker | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f1a20;
+      color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+      padding: 50px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .challenge-section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #1e2c38;
+      border-radius: 15px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #222;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    button.complete-btn {
+      background-color: #f0b86b;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      color: black;
+    }
+
+    button.complete-btn:hover {
+      background-color: #e0a455;
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    footer {
+      background-color: #0c0c0c;
+      padding: 15px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Fitness Tracker</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="challenges.html">Challenges</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Fitness Challenges</h1>
+  <p>Push your limits and conquer each task!</p>
+</header>
+
+<section class="challenge-section">
+  <h2>Weekly Goals</h2>
+  <ul id="challenge-list">
+    <!-- Challenges will be loaded here -->
+  </ul>
+</section>
+
+<footer>
+  <p>© 2025 Fitness Tracker | Built by You</p>
+</footer>
+
+<script>
+  const defaultChallenges = [
+    "Complete a 30-minute cardio session",
+    "Do 100 push-ups in a day",
+    "Meditate for 10 minutes",
+    "Drink 2 liters of water",
+    "Take 10,000 steps",
+    "Try a new healthy recipe"
+  ];
+
+  function loadChallenges() {
+    const saved = JSON.parse(localStorage.getItem("challenges")) || defaultChallenges.map(text => ({ text, done: false }));
+    const list = document.getElementById("challenge-list");
+    list.innerHTML = "";
+
+    saved.forEach((challenge, index) => {
+      const li = document.createElement("li");
+      li.textContent = challenge.text;
+      if (challenge.done) li.classList.add("completed");
+
+      const btn = document.createElement("button");
+      btn.textContent = challenge.done ? "Undo" : "Complete";
+      btn.className = "complete-btn";
+      btn.onclick = () => toggleComplete(index);
+
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+
+    localStorage.setItem("challenges", JSON.stringify(saved));
+  }
+
+  function toggleComplete(index) {
+    const challenges = JSON.parse(localStorage.getItem("challenges")) || [];
+    challenges[index].done = !challenges[index].done;
+    localStorage.setItem("challenges", JSON.stringify(challenges));
+    loadChallenges();
+  }
+
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("active");
+  }
+
+  window.onload = loadChallenges;
+</script>
+
+</body>
+</html>

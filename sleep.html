@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sleep Tracker | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tracker-section {
+      max-width: 600px;
+      margin: 60px auto;
+      background-color: #1e2c38;
+      padding: 20px;
+      border-radius: 15px;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      font-size: 1em;
+    }
+    input, button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #555;
+      background-color: #222;
+      color: #fff;
+    }
+    button {
+      background-color: #f0b86b;
+      color: #000;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e0a455;
+    }
+    table {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #555;
+      background-color: #222;
+      color: #fff;
+    }
+    th {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Fitness Tracker</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="sleep.html">Sleep</a></li>
+    <li><a href="hydration.html">Hydration</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Sleep Tracker</h1>
+  <p>Track your sleeping habits and improve your rest</p>
+</header>
+
+<section class="tracker-section">
+  <form id="sleep-form">
+    <label for="sleepDate">Date:</label>
+    <input type="date" id="sleepDate" required>
+
+    <label for="hours">Hours Slept:</label>
+    <input type="number" id="hours" required min="1" max="24">
+
+    <button type="submit">Log Sleep</button>
+  </form>
+
+  <table id="sleep-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Hours</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<footer>
+  <p>© 2025 Fitness Tracker | Built by You</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("active");
+  }
+
+  const form = document.getElementById('sleep-form');
+  const tableBody = document.querySelector('#sleep-table tbody');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const date = document.getElementById('sleepDate').value;
+    const hours = document.getElementById('hours').value;
+
+    const entry = { date, hours };
+    const data = JSON.parse(localStorage.getItem('sleepData')) || [];
+    data.push(entry);
+    localStorage.setItem('sleepData', JSON.stringify(data));
+
+    form.reset();
+    loadSleepData();
+  });
+
+  function loadSleepData() {
+    const data = JSON.parse(localStorage.getItem('sleepData')) || [];
+    tableBody.innerHTML = '';
+
+    data.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${item.date}</td><td>${item.hours} hrs</td>`;
+      tableBody.appendChild(row);
+    });
+  }
+
+  window.onload = loadSleepData;
+</script>
+
+</body>
+</html>

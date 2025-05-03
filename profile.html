@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | Fitness Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f1a20;
+      color: #fff;
+      margin: 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      background-color: #111;
+      padding: 10px 20px;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+    }
+    .menu-btn {
+      font-size: 1.5em;
+      cursor: pointer;
+      display: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links li a:hover {
+      color: #f0b86b;
+    }
+    header {
+      background: linear-gradient(to right, #1d2b64, #f8cdda);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+      font-family: 'Playfair Display', serif;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .profile-container {
+      background-color: #1e2c38;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .profile-info h2 {
+      margin-bottom: 20px;
+    }
+    .profile-info p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    .profile-info button {
+      background-color: #f0b86b;
+      color: black;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .profile-info button:hover {
+      background-color: #e0a455;
+    }
+    footer {
+      background-color: #0c0c0c;
+      padding: 15px;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Fitness Tracker</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="profile.html">Profile</a></li>
+    <li><a href="workout.html">Workout</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Your Profile</h1>
+  <p>Manage your fitness journey and track your progress</p>
+</header>
+
+<section class="profile-container">
+  <div class="profile-info">
+    <h2>Welcome, shan</h2>
+    <p><strong>Email:</strong> shan@example.com</p>
+    <p><strong>Age:</strong> 18</p>
+    <p><strong>Height:</strong> 5'10"</p>
+    <p><strong>Weight:</strong> 70 kg</p>
+    <p><strong>Fitness Level:</strong> Intermediate</p>
+    <button onclick="alert('Profile updated!')">Update Profile</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Fitness Tracker | Built by us</p>
+</footer>
+
+<script>
+  // Toggle menu for mobile view
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>
