@@ -3,55 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About | Fitness Tracker</title>
+  <title>About Us | Fitness Tracker</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1') no-repeat center center/cover;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 3em;
+    }
+    .about-section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .feature-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .feature-box:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0c0c0c;
+      color: white;
+      margin-top: 60px;
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="logo">Fitness Tracker</div>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-</nav>
-
 <header>
-  <h1>About Us</h1>
-  <p>Fitness Tracker - Your Personal Fitness Assistant</p>
+  <h1>About Fitness Tracker</h1>
 </header>
 
-<section>
-  <h2>Our Mission</h2>
-  <p>Our goal is to provide a comprehensive platform to help users track their fitness journey. From logging workouts to setting hydration reminders, we aim to provide a seamless experience for users to stay healthy and motivated.</p>
-</section>
-
-<section>
-  <h2>Features</h2>
-  <ul>
-    <li>AI-driven workout plans</li>
-    <li>Personalized progress tracking</li>
-    <li>Hydration and sleep tracking</li>
-    <li>Challenges to stay motivated</li>
-    <li>Trainer marketplace</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Our Vision</h2>
-  <p>We envision a world where everyone can access the tools they need to maintain a healthy and active lifestyle. With continuous improvements and new features, we strive to make fitness accessible to all.</p>
+<section class="about-section">
+  <p>Our mission is to help you achieve your fitness goals through powerful, easy-to-use tools and a friendly design. Whether you're tracking hydration, workouts, meditation, or sleep — we’re with you every step of the way.</p>
+  
+  <div class="features">
+    <div class="feature-box">
+      <h3>Workout Log</h3>
+      <p>Track your daily exercises and view your progress in real time.</p>
+    </div>
+    <div class="feature-box">
+      <h3>AI Plans</h3>
+      <p>Get smart, personalized plans based on your goals and habits.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Meditation</h3>
+      <p>Relax your mind with guided sessions and a simple timer.</p>
+    </div>
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Fitness Tracker | </p>
+  <p>© 2025 Fitness Tracker | Built with passion</p>
 </footer>
-
-<script>
-  function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
-  }
-</script>
 
 </body>
 </html>
